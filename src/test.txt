@@ -1,0 +1,68 @@
+function App() {
+  return (
+    <>
+      <div>
+        <div className="row">
+          <h1>ALPACA GENERATOR</h1>
+        </div>
+        <div className="row">
+          <div className="col position-realtive">
+            <img
+              className="z-0 position-absolute"
+              src="/images/backgrounds/blue50.png"
+              alt="backgound"
+            />
+            <img
+              className="z-1 position-absolute"
+              src="/images/ears/default.png"
+              alt="ears"
+            />
+            {/* <img
+              className="z-2 position-absolute img-responsive"
+              src="/images/neck/default.png"
+              alt="neck"
+            />
+            <img
+              className="z-2 position-absolute img-responsive"
+              src="/images/leg/default.png"
+              alt="leg"
+            />
+            <img
+              className="z-3 position-absolute img-responsive"
+              src="/images/nose.png"
+              alt="nose"
+            />
+            <img
+              className="z-3 position-absolute img-responsive"
+              src="/images/eyes/default.png"
+              alt="eyes"
+            />
+            <img
+              className="z-3 position-absolute img-responsive"
+              src="/images/mouth/default.png"
+              alt="mouth"
+            />
+            <img
+              className="z-4 position-absolute img-responsive"
+              src="/images/accessories/headphone.png"
+              alt="accessories"
+            />
+            <img
+              className="z-2 position-absolute img-responsive"
+              src="/images/hair/default.png"
+              alt="hair"
+            /> */}
+          </div>
+          <div className="col">
+            <p>hello 1</p>
+          </div>
+        </div>
+        <div className="row">
+          <p>hello 2S</p>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default App;
