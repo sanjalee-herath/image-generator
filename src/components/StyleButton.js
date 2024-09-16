@@ -11,7 +11,7 @@ function StyleButton({ styleCategory, onStyleClick }) {
       styleList.push(
         <Button
           key={filepath}
-          onClick={() => onStyleClick(filepath)}
+          onClick={() => onStyleClick(styleCategory, filepath)}
           variant="outline-primary"
         >
           {style.label}

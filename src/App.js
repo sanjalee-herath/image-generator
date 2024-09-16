@@ -21,19 +21,34 @@ function App() {
   );
   const [hairPath, setHairPath] = useState("/images/hair/default.png");
 
-  const handleOnStyleClick = (filepath) => {
-    if (styleCategory === "hair") setHairPath(filepath);
-    if (styleCategory === "backgrounds") setBackgroundPath(filepath);
-    if (styleCategory === "ears") setEarPath(filepath);
-    if (styleCategory === "neck") setNeckPath(filepath);
-    if (styleCategory === "leg") setLegPath(filepath);
-    if (styleCategory === "eyes") setEyesPath(filepath);
-    if (styleCategory === "mouth") setMouthPath(filepath);
-    if (styleCategory === "accessories") setAccessoriesPath(filepath);
+  const handleOnStyleChange = (category, filepath) => {
+    setStyleCaregory(category);
+    if (category === "hair") setHairPath(filepath);
+    if (category === "backgrounds") setBackgroundPath(filepath);
+    if (category === "ears") setEarPath(filepath);
+    if (category === "neck") setNeckPath(filepath);
+    if (category === "leg") setLegPath(filepath);
+    if (category === "eyes") setEyesPath(filepath);
+    if (category === "mouth") setMouthPath(filepath);
+    if (category === "accessories") setAccessoriesPath(filepath);
   };
 
   const handleOnStyleCategoryClick = (category) => {
     setStyleCaregory(category);
+  };
+
+  const handleOnShuffleClick = () => {
+    Object.keys(styles).map((category) => {
+      const _styles = getStylesFromCategory(category);
+
+      const _min = 0;
+      const _max = _styles.styles.length - 1;
+      const _random = Math.floor(Math.random() * (_max - _min + 1 + _min));
+
+      const filepath = _styles.imagePath + _styles.styles[_random].filename;
+
+      handleOnStyleChange(category, filepath);
+    });
   };
 
   return (
@@ -112,7 +127,7 @@ function App() {
           <div className="flex-grow-1">
             <h3 className="mb-4">Style</h3>
             <StyleButton
-              onStyleClick={handleOnStyleClick}
+              onStyleClick={handleOnStyleChange}
               styleCategory={styleCategory}
             />
           </div>
@@ -121,7 +136,12 @@ function App() {
       <div className="d-flex mt-5">
         <div className="flex-grow-1">
           <div className="d-flex justify-content-evenly">
-            <Button variant="light">
+            <Button
+              onClick={() => {
+                handleOnShuffleClick();
+              }}
+              variant="light"
+            >
               <div className="d-flex gap-2">
                 <i className="ri-shuffle-fill"></i>
                 Random
