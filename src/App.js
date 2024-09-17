@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 
 import "remixicon/fonts/remixicon.css";
+import mergeImages from "merge-images";
 import StyleButton from "./components/StyleButton";
 import { getStylesFromCategory, styles } from "./styles";
 
@@ -51,13 +52,52 @@ function App() {
     });
   };
 
+  const base64ToBlob = (base64String, contentType = "") => {
+    const byteCharacters = atob(base64String);
+    const byteArrays = [];
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteArrays.push(byteCharacters.charCodeAt(i));
+    }
+
+    const byteArray = new Uint8Array(byteArrays);
+    return new Blob([byteArray], { type: contentType });
+  };
+
+  const handleOnDownloadClick = () => {
+    mergeImages([
+      backgroundPath,
+      earPath,
+      neckPath,
+      legPath,
+      hairPath,
+      "/images/nose.png",
+      eyesPath,
+      mouthPath,
+      accessoriesPath,
+    ]).then((b64) => {
+      fetch(b64)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = blobUrl;
+          a.download = "image.png";
+          a.click();
+        });
+    });
+  };
+
   return (
     <div className="container">
       <div>
         <h1>ALPACA GENERATOR</h1>
       </div>
       <div style={{ display: "flex" }}>
-        <div style={{ position: "relative", flexGrow: 1 }}>
+        <div
+          className="image-container"
+          style={{ position: "relative", flexGrow: 1 }}
+        >
           <img
             style={{ position: "relative", zIndex: 0 }}
             src={backgroundPath}
@@ -147,7 +187,12 @@ function App() {
                 Random
               </div>
             </Button>
-            <Button variant="light">
+            <Button
+              onClick={() => {
+                handleOnDownloadClick();
+              }}
+              variant="light"
+            >
               <div className="d-flex gap-2">
                 <i className="ri-download-line"></i>
                 Download
