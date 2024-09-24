@@ -6,6 +6,8 @@ function StyleButton({ styleCategory, onStyleClick }) {
 
   const renderStyles = () => {
     const styleList = [];
+    const categoryStylesLength = category.styles.length;
+
     for (const style of category.styles) {
       const filepath = category.imagePath + style.filename;
       styleList.push(
@@ -18,9 +20,10 @@ function StyleButton({ styleCategory, onStyleClick }) {
         </Button>
       );
     }
+    console.log(categoryStylesLength);
     return styleList;
   };
-  return <div className="d-flex gap-3">{renderStyles()}</div>;
+  return <div className="row row-cols-3">{renderStyles()}</div>;
 }
 
 export default StyleButton;

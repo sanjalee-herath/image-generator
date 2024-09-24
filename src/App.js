@@ -52,18 +52,6 @@ function App() {
     });
   };
 
-  const base64ToBlob = (base64String, contentType = "") => {
-    const byteCharacters = atob(base64String);
-    const byteArrays = [];
-
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteArrays.push(byteCharacters.charCodeAt(i));
-    }
-
-    const byteArray = new Uint8Array(byteArrays);
-    return new Blob([byteArray], { type: contentType });
-  };
-
   const handleOnDownloadClick = () => {
     mergeImages([
       backgroundPath,
@@ -90,67 +78,63 @@ function App() {
 
   return (
     <div className="container">
-      <div>
-        <h1>ALPACA GENERATOR</h1>
+      <div className="row mt-3">
+        <h1 className="fs-1 fw-bolder">ALPACA GENERATOR</h1>
       </div>
-      <div style={{ display: "flex" }}>
-        <div
-          className="image-container"
-          style={{ position: "relative", flexGrow: 1 }}
-        >
+      <div className="row mt-3" style={{ height: "600px" }}>
+        <div className="col" style={{ position: "relative", height: "100%" }}>
           <img
-            style={{ position: "relative", zIndex: 0 }}
+            style={{ position: "relative", zIndex: 0, height: "100%" }}
             src={backgroundPath}
             alt="backgound"
           />
           <img
-            style={{ position: "absolute", left: 0, zIndex: 1 }}
+            style={{ position: "absolute", left: 0, zIndex: 1, height: "100%" }}
             src={earPath}
             alt="ears"
           />
           <img
-            style={{ position: "absolute", left: 0, zIndex: 2 }}
+            style={{ position: "absolute", left: 0, zIndex: 2, height: "100%" }}
             src={neckPath}
             alt="neck"
           />
           <img
-            style={{ position: "absolute", left: 0, zIndex: 2 }}
+            style={{ position: "absolute", left: 0, zIndex: 2, height: "100%" }}
             src={legPath}
             alt="leg"
           />
           <img
-            style={{ position: "absolute", left: 0, zIndex: 3 }}
+            style={{ position: "absolute", left: 0, zIndex: 3, height: "100%" }}
             src="/images/nose.png"
             alt="nose"
           />
           <img
-            style={{ position: "absolute", left: 0, zIndex: 3 }}
+            style={{ position: "absolute", left: 0, zIndex: 3, height: "100%" }}
             src={eyesPath}
             alt="eyes"
           />
           <img
-            style={{ position: "absolute", left: 0, zIndex: 3 }}
+            style={{ position: "absolute", left: 0, zIndex: 3, height: "100%" }}
             src={mouthPath}
             alt="mouth"
           />
           <img
-            style={{ position: "absolute", left: 0, zIndex: 4 }}
+            style={{ position: "absolute", left: 0, zIndex: 4, height: "100%" }}
             src={accessoriesPath}
             alt="accessories"
           />
           <img
-            style={{ position: "absolute", left: 0, zIndex: 2 }}
+            style={{ position: "absolute", left: 0, zIndex: 2, height: "100%" }}
             src={hairPath}
             alt="hair"
           />
         </div>
-        <div
-          className="d-flex flex-column align-content-between ms-3"
-          style={{ flexGrow: 1 }}
-        >
-          <div className="flex-grow-1">
-            <h3 className="mb-4">Accessories the alpaca's</h3>
-            <div className="d-flex gap-3">
+        <div className="col">
+          <div className="row px-auto" style={{ height: "50%" }}>
+            <h3 className="text-uppercase fs-3 fw-bold">
+              Accessories the alpaca's
+            </h3>
+            <div className="row row-cols-3">
               {Object.keys(styles).map((category) => (
                 <Button
                   onClick={() => {
@@ -164,8 +148,8 @@ function App() {
               ))}
             </div>
           </div>
-          <div className="flex-grow-1">
-            <h3 className="mb-4">Style</h3>
+          <div className="row px-auto" style={{ height: "50%" }}>
+            <h3 className="text-uppercase fs-3 fw-bold mt-5">Style</h3>
             <StyleButton
               onStyleClick={handleOnStyleChange}
               styleCategory={styleCategory}
@@ -173,8 +157,8 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="d-flex mt-5">
-        <div className="flex-grow-1">
+      <div className="row mt-5">
+        <div className="col">
           <div className="d-flex justify-content-evenly">
             <Button
               onClick={() => {
@@ -200,7 +184,7 @@ function App() {
             </Button>
           </div>
         </div>
-        <div className="flex-grow-1"></div>
+        <div className="col"></div>
       </div>
     </div>
   );
